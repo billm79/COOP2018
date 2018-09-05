@@ -1,7 +1,7 @@
 # README.md
 
 ## Ready to be reviewed
-- U02_S00_ConvertCtoF.py
+- \<bullet list of files ready to be reviewed\>
 
 ## In progress
-- U02_Ex01_myProgram.py
+- \<bullet list of files in repository that are in progress\>
