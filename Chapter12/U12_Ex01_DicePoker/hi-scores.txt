@@ -1,0 +1,10 @@
+Bill,120
+Joe,110
+Jack,110
+Jad,102
+Jarod,102
+Julie,102
+Mason,100
+Bill,98
+Bob,98
+Jen,95

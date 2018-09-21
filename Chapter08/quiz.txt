@@ -1,0 +1,24 @@
+Pop Quiz
+
+Required elements:
+------------------
+- algorithm
+- conditional branching
+- loops (both while and for)
+- user input
+- tabular output
+
+INPUT
+-----
+User input of several pairs of values
+    (use a sentinel to exit input)
+
+OUTPUT
+------
+Table of ...
+
+    num1    num2     num1 * num2
+
+Include column headings
+
+If product is negative, print NEGATIVE

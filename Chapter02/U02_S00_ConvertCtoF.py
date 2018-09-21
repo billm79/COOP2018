@@ -20,6 +20,7 @@
 #   Get °C from user and assign to celsius
 #   Calculate °F using 9/5 * °C + 32 and assign to fahrenheit
 #   Print °F
+#   ...and we're done!
 
 
 def main():
