@@ -24,7 +24,11 @@ def main():
     print("For example, multiplication (e.g. 2x) must be specified using an asterisk (e.g. 2*x).")
     print("Exponentiation is indicated using the caret symbol, ^ (e.g. x squared is x^2).")
     print("Do not enter 'y='.\n")
-    expr = input("Enter equation: y = ")
+
+    # debug: set expr = '3 * x ^ 2 + 32 * x + 11'
+    expr = '3 * x ^ 2 + 32 * x + 11'        # debug
+    # uncomment next line for production
+    # expr = input("Enter equation: y = ")
     print(expr)     # debug
 
     # remove spaces
@@ -46,17 +50,26 @@ def main():
         c = expr[i]
 
         # if 'x' is found, find coefficient and exponent
-        if c == 'x' and i != 0:                             # 'x' found
-            x_loc = i
+        if c == 'x':                                        # 'x' found
+            x_loc = i                                       # save x location
 
             # find coefficient
-            j = x_loc
+            j = x_loc                                       # start at x_loc
             while j > 0:
-                # if this character is an operator, stop looking for coefficient
+                # if this character is an addition or subtraction, stop looking for coefficient
                 if is_contained_in(expr[j-1], ['+', '-']):
                     break
                 print(j-1, expr[j-1])
                 j -= 1
+
+            if x_loc == 0:
+                coeff = 1
+            else:
+                coeff = eval(expr[j:x_loc - 1])
+
+            print('coeff =', coeff)
+
+            # find exponent
 
 
 def is_contained_in(char, str_list):
