@@ -28,7 +28,7 @@
 from graphics import *
 from math import pi, cos, sin
 
-def main(winWidth, winHeight, centerPoint):
+def main(winWidth, winHeight):  #, centerPoint):
     win = GraphWin("Face", winWidth, winHeight)
     drawFace(win, winWidth, winHeight)
     drawEyes(win, winWidth, winHeight)
@@ -99,12 +99,12 @@ def drawArc(win, centerX, centerY, arcRadius, arcLengthDeg, midRad):
         Point(x,y).draw(win)
         i += 0.01   #pi/1000
 
-if __name__ == 'main':
-    main(200, 200)
-    main(300, 300)
-    main(400, 400)
-    main(600, 600)
-    main(800, 800)
-    main(200, 300)
-    main(300, 200)
-    input("Press <Enter> to close graphics window.")
+# if __name__ == 'main':
+main(200, 200)
+main(300, 300)
+main(400, 400)
+main(600, 600)
+main(800, 800)
+main(200, 300)
+main(300, 200)
+input("Press <Enter> to close graphics window.")

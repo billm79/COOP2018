@@ -33,7 +33,7 @@
 
 from graphics import *
 from math import sqrt
-from U04_Ex08_LineSegmentInfo import getMouseClick
+from Chapter04.U04_Ex08_LineSegmentInfo import getMouseClick
 
 def main():
     #   Create GraphWin

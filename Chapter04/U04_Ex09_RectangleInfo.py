@@ -29,8 +29,8 @@
 
 
 from graphics import *
-from U04_Ex07_CircleIntersection import drawAxes
-from U04_Ex08_LineSegment import getMouseClick
+from Chapter04.U04_Ex07_CircleIntersection import drawAxes
+from Chapter04.U04_Ex08_LineSegmentInfo import getMouseClick
 from math import sqrt
 
 def main():
