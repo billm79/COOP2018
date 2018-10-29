@@ -57,4 +57,6 @@ def letterGrade(score):
         letter = 'D'
     return letter
 
-main()
+
+if __name__ == '__main__':
+    main()
