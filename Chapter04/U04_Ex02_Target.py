@@ -18,7 +18,7 @@
 #
 # Algorithm (pseudocode)
 #   Create a GraphWin
-#   Create five circles, starting with the center.
+#   Define a list with five circle objects
 #   The radius of each successive circle is the next integer multiple of the center circle.
 #   Draw circles, starting from the outside.
 
@@ -38,6 +38,13 @@ def main(winSide):
         circle.draw(win)
 
 def makeCircle(c, r, color):
+    """
+    Make a circle object centered at c with radius r and filled with color
+    :param c: Point -> center of circle
+    :param r: int -> radius of circle
+    :param color: str -> color name for fill
+    :return: Circle -> circle object
+    """
     circ = Circle(c, r)
     circ.setOutline("black")
     circ.setFill(color)

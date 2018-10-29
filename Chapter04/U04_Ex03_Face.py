@@ -37,12 +37,29 @@ def main(winWidth, winHeight):  #, centerPoint):
     drawNose(win, winWidth, winHeight)
 
 def drawFace(win, winW, winH):
+    """
+    Draw circle for face, sized relative to window size
+    :param win: GraphWin object
+    :param winW: int -> window width
+    :param winH: int -> window height
+    """
     face = Circle(Point(winW/2, winH/2), min(winW, winH)*11/24)
     face.setOutline("black")
     face.setFill("burlywood")
     face.draw(win)
 
 def drawEyes(win, winW, winH):
+    """
+    Draws eyes for face
+    Algorithm:
+        Draw left eye outline
+        Draw left eye iris
+        Draw left eye pupil
+        Clone all three parts for right eye and move into place
+    :param win: GraphWin object
+    :param winW: int -> window width
+    :param winH: int -> window height
+    """
 #    leftEye = Oval(Point(300-120-40, 300-80-20), Point(300-120+40, 300-80+20))
     leftEye = Oval(Point(winW/2-winW/5-winW/15, winH/2-winH/7.5-winH/30),
                    Point(winW/2-winW/5+winW/15, winH/2-winH/7.5+winH/30))
@@ -68,13 +85,31 @@ def drawEyes(win, winW, winH):
     rightPupil.draw(win)
 
 def drawMouth(win, winW, winH):
+    """
+    Draws arc for mouth
+    :param win: GraphWin object
+    :param winW: int -> window width
+    :param winH: int -> window height
+    """
     drawArc(win, winW/2, winH/2, winH/4, 60, 1.5)                # draw mouth
 
 def drawEyebrows(win, winW, winH):
+    """
+    Draws arcs for eyebrows
+    :param win: GraphWin object
+    :param winW: int -> window width
+    :param winH: int -> window height
+    """
     drawArc(win, winW/2-winW/5, winH/2-winH/7.5+winH/10, winH/6, 30, 0.5)      # left eyebrow
     drawArc(win, winW/2+winW/5, winH/2-winH/7.5+winH/10, winH/6, 30, 0.5)      # right eyebrow
 
 def drawNose(win, winW, winH):
+    """
+    Draws red nose with reflection spot (polygon)
+    :param win: GraphWin object
+    :param winW: int -> window width
+    :param winH: int -> window height
+    """
     noseRad = winW/12
     nose = Circle(Point(winW/2, winH/2+winH/15), noseRad)
     nose.setOutline("red4")
@@ -89,6 +124,15 @@ def drawNose(win, winW, winH):
     spot.draw(win)
 
 def drawArc(win, centerX, centerY, arcRadius, arcLengthDeg, midRad):
+    """
+    Draws an arc
+    :param win: GraphWin object
+    :param centerX: int -> center of arc x-coord
+    :param centerY: int -> center of arc y-coord
+    :param arcRadius: int -> radius of arc
+    :param arcLengthDeg: int -> arc length in degrees
+    :param midRad: int -> midpoint of arc in radians
+    """
     arcCenter = Point(centerX, centerY)
     arcRad = arcLengthDeg * (pi / 180)
     i = midRad*pi-arcRad/2
@@ -100,11 +144,11 @@ def drawArc(win, centerX, centerY, arcRadius, arcLengthDeg, midRad):
         i += 0.01   #pi/1000
 
 # if __name__ == 'main':
-main(200, 200)
-main(300, 300)
-main(400, 400)
-main(600, 600)
+# main(200, 200)
+# main(300, 300)
+# main(400, 400)
+# main(600, 600)
 main(800, 800)
-main(200, 300)
-main(300, 200)
+# main(200, 300)
+# main(300, 200)
 input("Press <Enter> to close graphics window.")
