@@ -50,5 +50,8 @@ def makeCircle(c, r, color):
     circ.setFill(color)
     return circ
 
-main(600)
-input("Press <Enter> to close graphics window.")
+
+if __name__ == '__main__':
+    main(600)
+    input("Press <Enter> to close graphics window.")
+
