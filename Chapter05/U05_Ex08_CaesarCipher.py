@@ -15,17 +15,30 @@
 #   Encode and decode Caesar ciphers
 #
 # Algorithm (pseudocode)
-#   Print intro
-#   Get input string
-#   Convert to upper case (arbitrary)
-#   Get key (negative decodes)
-#   
-#   New Encode/Decode:
-#       For each character
+#   main()
+#       Print intro
+#       Get input string
+#       Convert to upper case (arbitrary)
+#       Get key (negative decodes)
+#       Call methods 1 and 2 to encode/decode using two different methods
+#       Print results
+#
+#   method1(string, key)
+#       For each character in string
+#           Ignore non letters (pass through unchanged)
 #           Calculate code plus key minus 65
 #           Add new code mod 26 plus 65 to output string
+#       return output string
 #
-#   Print results
+#   method2(string, key)
+#       For each character in string
+#           Find character in "ABC..XYZ" string, noting its index
+#           Ignore non letters (pass through unchanged)
+#           Change index by key value
+#           Mod new index with 26 to make sure it is in 1..26 range
+#           Accumulate to output string
+#       return output string
+#
 #
 # OLD CODE...
 #   Encode:
@@ -56,7 +69,20 @@ def main():
     # Get key (Negative decodes)
     key = int(input('Please enter the offset key (negative decodes): '))
 
+    outputStr1 = method1(inputStr, key)
+    outputStr2 = method2(inputStr, key)
+
+    print('\nMETHOD 1\n'
+          ' Input: {0}\n'
+          'Output: {1}'.format(inputStr, outputStr1))
+    print('\nMETHOD 2\n'
+          ' Input: {0}\n'
+          'Output: {1}'.format(inputStr, outputStr2))
+
+
+def method1(inputStr, key):
     outputStr = ''
+
     # For each character
     for char in inputStr:
         # If char is a letter...
@@ -75,8 +101,34 @@ def main():
         # add space, ignore others
         elif char == ' ':
             outputStr += char
+    return outputStr
 
-    print(' Input: {0}\n'
-          'Output: {1}'.format(inputStr, outputStr))
+
+def method2(inputStr, key):
+    outputStr = ''
+    abcStr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+    # For each character in string
+    for char in inputStr:
+        # Find character in "ABC..XYZ" string, noting its index
+        idx = abcStr.find(char)
+
+        # Ignore non letters (pass through unchanged)
+        if idx == -1:
+            # Accumulate to output string
+            outputStr += char
+        else:
+            # Change index by key value
+            idx += key
+
+            # Mod new index with 26 to make sure it is in 1..26 range
+            idx = idx % 26
+
+            # Accumulate to output string
+            outputStr += abcStr[idx]
+
+    # return output string
+    return outputStr
+
 
 main()
