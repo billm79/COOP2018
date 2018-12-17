@@ -1,4 +1,4 @@
-# U05_Ex06_Numerology.py
+# U05_Ex06_Numerology_old.py
 #
 #  Author: Bill Montana
 #  Course: Coding for OOP
@@ -12,18 +12,26 @@
 #    Chapter: 5
 #
 # Program Description
-#   Determine the "numeric value" of a string of text by assigning
-#   each letter a value from 1 to 26 and adding them up.
+#   Determine the "numeric value" of a string of words using a function
+#       that determines the "numeric value" of a single word by
+#       assigning each letter a value from 1 to 26 and adding them up.
 #
 # Algorithm (pseudocode)
-#   Print intro
-#   Get string input
-#   Convert string to lower case
-#   For each character
-#       Ignore non letters
-#       Subtract 96 from its code
-#       Accumulate character codes with addition
-#   Print results
+#   main()
+#       Print intro
+#       Get string input
+#       Parse into words
+#       For each word
+#           Call getWordNum() to get word number (wordNum)
+#           Accumulate wordNums with addition
+#       Print results
+#
+#   Function getWordNum()
+#       Convert string to lower case
+#       For each character
+#           Ignore non letters
+#           Subtract 96 from its code
+#           Accumulate character codes with addition
 
 
 def main():
@@ -33,14 +41,30 @@ def main():
     # Get string input
     inputStr = input('Please enter a string of text: ')
 
+    # Parse into words
+    words = inputStr.split()
+
+    numVal = 0
+
+    # For each word
+    for word in words:
+        #     Call getWordNum() to get word number (wordNum)
+        numVal += getWordNum(word)
+        #     Accumulate wordNums with addition
+
+    #   Print results
+    print('The numeric value for\n{0}\nis {1}.'.format(inputStr, numVal))
+
+
+def getWordNum(word):
     # Convert string to lower case
-    inputStr = inputStr.lower()
+    word = word.lower()
 
     numVal = 0
     a = 97
     z = 123
     # For each character
-    for char in inputStr:
+    for char in word:
         cCode = ord(char)
 
         # Ignore non letters
@@ -48,8 +72,7 @@ def main():
             # Subtract 96 from its code
             # Accumulate character codes with addition
             numVal += (cCode - 96)
+    return numVal
 
-    #   Print results
-    print('The numeric value for\n{0}\nis {1}.'.format(inputStr, numVal))
 
 main()
