@@ -40,7 +40,7 @@ def main():
     ttlLen = 0
     for word in words:
         word = strip(word)
-        # print("[{}]: {}".format(word, len(word)))   # uncomment to see "[word]: len(word)"
+        print("[{}]: {}".format(word, len(word)))   # uncomment to see "[word]: len(word)"
         ttlLen += len(word)
 
     # Divide by number of words to get average word length
