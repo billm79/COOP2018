@@ -24,8 +24,7 @@
 
 import traceback, sys
 
-from misc.my_sum import *
-from fractions import Fraction
+# from _path_to_my_program_file_ import *
 
 COLOR_BLUE = '\x1b[1;34m'
 COLOR_RED  = '\x1b[6;31m'
@@ -61,6 +60,7 @@ def printResults(results):
         # determine lengths of fields based on data type
         for j in range(len(results[i])):
             thisType = type(results[i][j])
+            print(results[i][j], thisType)
             if thisType == str:
                 thisLen = len(results[i][j])
             elif thisType == int or thisType == float:
@@ -106,32 +106,7 @@ def testTemplate():
     results.append(runTest('function(params)', 'expected results (properly typed)'))
     printResults(results)
 
-def testSphereArea():
-    results = []
-    results.append(runTest('round(sphereArea(math.pow(math.pi, -0.5)))', 4))
-    printResults(results)
-
-def testSphereVolume():
-    results = []
-    results.append(runTest('round(sphereVolume(math.pow(math.pi, -1/3)))', round(4/3)))
-    printResults(results)
-
-def testMany():
-    results = []
-    results.append(runTest('round(sphereArea(math.pow(math.pi, -0.5)))', 4))
-    results.append(runTest('round(sphereVolume(math.pow(math.pi, -1/3)))', round(4/3)))
-    printResults(results)
-
-def test_my_sum():
-    results = []
-    results.append(runTest('my_sum([1,2,3])', 6))
-    results.append(runTest('my_sum((1,2,2))', 6))
-    printResults(results)
-
 
 if __name__ == '__main__':
     # Replace 'function_to_call' with the name of the function you created above
-    test_my_sum()
-    # testSphereArea()
-    # testSphereVolume()
-    # testMany()
+    # function_to_call()
