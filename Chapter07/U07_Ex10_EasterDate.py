@@ -103,4 +103,47 @@ def main():
         # print result
         print('\nFor the year {0}, Easter occurs on {1} {2}{3}'.format(year, month, easter, ordSuffix(easter)))
 
-main()
+
+if __name__ == '__main__':
+    main()
+
+
+'''
+RESULTS:
+========
+contains("1", "123")   -->       1 |       1 | [ Pass ]
+contains("1", "231")   -->       1 |       1 | [ Pass ]
+contains("1", "312")   -->       1 |       1 | [ Pass ]
+contains("0", "123")   -->       0 |       0 | [ Pass ]
+========
+
+RESULTS:
+========
+ordSuffix(0)   -->   th |   th | [ Pass ]
+ordSuffix(1)   -->   st |   st | [ Pass ]
+ordSuffix(2)   -->   nd |   nd | [ Pass ]
+ordSuffix(3)   -->   rd |   rd | [ Pass ]
+ordSuffix(4)   -->   th |   th | [ Pass ]
+ordSuffix(5)   -->   th |   th | [ Pass ]
+ordSuffix(6)   -->   th |   th | [ Pass ]
+ordSuffix(7)   -->   th |   th | [ Pass ]
+ordSuffix(8)   -->   th |   th | [ Pass ]
+ordSuffix(9)   -->   th |   th | [ Pass ]
+========
+
+ERROR: Year must be between 1900 and 2099.
+
+ERROR: Year must be between 1900 and 2099.
+
+RESULTS:
+========
+easterDate(1899)   -->      (None, -1, None) |      (None, -1, None) | [ Pass ]
+easterDate(1900)   -->   ('April', 15, 'th') |   ('April', 15, 'th') | [ Pass ]
+easterDate(2099)   -->   ('April', 12, 'th') |   ('April', 12, 'th') | [ Pass ]
+easterDate(2100)   -->      (None, -1, None) |      (None, -1, None) | [ Pass ]
+easterDate(1981)   -->   ('April', 19, 'th') |   ('April', 19, 'th') | [ Pass ]
+easterDate(1954)   -->   ('April', 18, 'th') |   ('April', 18, 'th') | [ Pass ]
+easterDate(2018)   -->    ('April', 1, 'st') |    ('April', 1, 'st') | [ Pass ]
+easterDate(2019)   -->   ('April', 21, 'st') |   ('April', 21, 'st') | [ Pass ]
+========
+'''
