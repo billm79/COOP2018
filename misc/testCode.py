@@ -60,7 +60,7 @@ def printResults(results):
         # determine lengths of fields based on data type
         for j in range(len(results[i])):
             thisType = type(results[i][j])
-            print(results[i][j], thisType)
+            # print(results[i][j], thisType)
             if thisType == str:
                 thisLen = len(results[i][j])
             elif thisType == int or thisType == float:
