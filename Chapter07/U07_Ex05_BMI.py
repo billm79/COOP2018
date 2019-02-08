@@ -31,10 +31,22 @@ def main():
     # get weight and height from user
     weight = float(input('\nEnter weight in pounds: '))
     height = float(input('Enter height in inches: '))
+    bmi = calcBMI(weight, height)
+    status = setStatus(bmi)
 
+    # print status of above, within, or below healthy range (19-25, inclusive)
+    print('\nThe BMI for a weight of {0} pounds and height of {1} inches is {2:0.2f}'.format(weight, height, bmi))
+    print('This is {0} the normal range of 19 - 25.'.format(status))
+
+
+def calcBMI(weight, height):
     # calculate BMI: weight * 720 / height**2
     bmi = weight * 720 / height ** 2
 
+    return bmi
+
+
+def setStatus(bmi):
     # set status based on BMI
     status = 'below'
     if bmi > 25:
@@ -42,8 +54,29 @@ def main():
     elif bmi >= 19:
         status = 'within'
 
-    # print status of above, within, or below healthy range (19-25, inclusive)
-    print('\nThe BMI for a weight of {0} pounds and height of {1} inches is {2:0.2f}'.format(weight, height, bmi))
-    print('This is {0} the normal range of 19 - 25.'.format(status))
+    return status
 
-main()
+
+if __name__ == '__main__':
+    main()
+
+
+'''
+RESULTS:
+========
+calcBMI(100, 10)   -->   720 |   720.0 | [ Pass ]
+calcBMI(360, 60)   -->    72 |    72.0 | [ Pass ]
+calcBMI(490, 70)   -->    72 |    72.0 | [ Pass ]
+========
+
+RESULTS:
+========
+setStatus(18)   -->    below |    below | [ Pass ]
+setStatus(19)   -->   within |   within | [ Pass ]
+setStatus(20)   -->   within |   within | [ Pass ]
+setStatus(24)   -->   within |   within | [ Pass ]
+setStatus(25)   -->   within |   within | [ Pass ]
+setStatus(26)   -->    above |    above | [ Pass ]
+setStatus(30)   -->    above |    above | [ Pass ]
+========
+'''
