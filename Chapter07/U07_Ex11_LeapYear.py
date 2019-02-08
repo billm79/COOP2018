@@ -49,3 +49,17 @@ def isLeapYear(y):
 
 if __name__ == '__main__':
     main()
+
+
+'''
+RESULTS:
+========
+isLeapYear(1800)   -->       0 |       0 | [ Pass ]
+isLeapYear(1900)   -->       0 |       0 | [ Pass ]
+isLeapYear(2000)   -->       1 |       1 | [ Pass ]
+isLeapYear(2001)   -->       0 |       0 | [ Pass ]
+isLeapYear(2002)   -->       0 |       0 | [ Pass ]
+isLeapYear(2003)   -->       0 |       0 | [ Pass ]
+isLeapYear(2004)   -->       1 |       1 | [ Pass ]
+========
+'''
