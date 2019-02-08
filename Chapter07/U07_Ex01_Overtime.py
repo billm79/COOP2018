@@ -31,6 +31,14 @@ def main():
     hours = float(input('\nHow many hours were worked this week? '))
     rate = float(input('What is the hourly rate? '))
 
+    # calculate weekly wages
+    wages = calcWages(hours, rate)
+
+    # print results
+    print('\nFor {0:0.2f} hours at an hourly rate of ${1:0.2f}, weekly pay is ${2:0.2f}.'.format(hours, rate, wages))
+
+
+def calcWages(hours, rate):
     # calculate weekly wages by multiplying hours times rate
     wages = hours * rate
 
@@ -38,7 +46,18 @@ def main():
     if hours > 40:
         wages += (hours - 40) * rate / 2
 
-    # print results
-    print('\nFor {0:0.2f} hours at an hourly rate of ${1:0.2f}, weekly pay is ${2:0.2f}.'.format(hours, rate, wages))
+    return wages
 
-main()
+
+if __name__ == '__main__':
+    main()
+
+'''
+RESULTS:
+========
+calcWages(0, 10)    -->     0 |       0 | [ Pass ]
+calcWages(10, 10)   -->   100 |     100 | [ Pass ]
+calcWages(40, 10)   -->   400 |     400 | [ Pass ]
+calcWages(41, 10)   -->   415 |   415.0 | [ Pass ]
+========
+'''

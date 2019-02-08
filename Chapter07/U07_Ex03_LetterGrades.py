@@ -60,3 +60,21 @@ def letterGrade(score):
 
 if __name__ == '__main__':
     main()
+
+'''
+RESULTS:
+========
+letterGrade(0)     -->   F |   F | [ Pass ]
+letterGrade(59)    -->   F |   F | [ Pass ]
+letterGrade(60)    -->   D |   D | [ Pass ]
+letterGrade(69)    -->   D |   D | [ Pass ]
+letterGrade(70)    -->   C |   C | [ Pass ]
+letterGrade(79)    -->   C |   C | [ Pass ]
+letterGrade(80)    -->   B |   B | [ Pass ]
+letterGrade(89)    -->   B |   B | [ Pass ]
+letterGrade(90)    -->   A |   A | [ Pass ]
+letterGrade(99)    -->   A |   A | [ Pass ]
+letterGrade(100)   -->   A |   A | [ Pass ]
+letterGrade(110)   -->   A |   A | [ Pass ]
+========
+'''
