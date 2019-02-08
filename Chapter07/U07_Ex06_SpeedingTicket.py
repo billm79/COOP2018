@@ -24,11 +24,26 @@
 #       print amount of fine
 
 
+def main():
+    print("This program calculates possible fees for speeding given parameters of speed limit and clocked speed.\n")
+    limit = int(input('\nEnter the posted speed: '))
+    speed = float(input('Enter the clocked speed: '))
+    fine = checkSpeed(limit, speed)
+
+    # if speed is legal, print legal speed message
+    if fine == 0:
+        print('\nLimit: {0} mph\t|\tSpeed: {1:0.1f} mph\t|\tStatus: NOT SPEEDING'.format(limit, speed))
+    else:
+        # print amount of fine
+        print('\nLimit: {0} mph\t|\tSpeed: {1:0.1f} mph\t|\tStatus: SPEEDING\t|\tFine: ${2:0.2f}'.format(limit, speed, fine))
+
+
 def checkSpeed(limit, speed):
     # parameters are speed limit and clocked speed
-    # if speed is legal, print legal speed message
+    # if speed is legal, return fine of zero
     if speed <= limit:
-        print('\nLimit: {0} mph\t|\tSpeed: {1:0.1f} mph\t|\tStatus: NOT SPEEDING'.format(limit, speed))
+        return 0
+
     # otherwise, calculate fine(s)
     else:
         # base fine is $50
@@ -41,10 +56,21 @@ def checkSpeed(limit, speed):
         if speed > 90:
             fine += 200
 
-        # print amount of fine
-        print('\nLimit: {0} mph\t|\tSpeed: {1:0.1f} mph\t|\tStatus: SPEEDING\t|\tFine: ${2:0.2f}'.format(limit, speed, fine))
+    return fine
+
 
 if __name__ == '__main__':
-    limit = int(input('\nEnter the posted speed: '))
-    speed = float(input('Enter the clocked speed: '))
-    checkSpeed(limit, speed)
+    main()
+
+
+'''
+RESULTS:
+========
+checkSpeed(30, 20)   -->     0 |     0 | [ Pass ]
+checkSpeed(30, 29)   -->     0 |     0 | [ Pass ]
+checkSpeed(30, 30)   -->     0 |     0 | [ Pass ]
+checkSpeed(30, 31)   -->    55 |    55 | [ Pass ]
+checkSpeed(30, 90)   -->   350 |   350 | [ Pass ]
+checkSpeed(30, 91)   -->   555 |   555 | [ Pass ]
+========
+'''
