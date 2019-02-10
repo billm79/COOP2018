@@ -17,12 +17,12 @@
 # Algorithm (pseudocode)
 #   introduce program
 #   create a list with sample data with which to test
-#   verify date to be valid by calling isValidDate(), quit if not
 #   for each element in list validate with isValidDate() and call dayNumber() with element as parameter
 #   print results
 #
 #   dayNumber():
 #       d is date argument in mm/dd/yyyy format
+#       verify date to be valid by calling isValidDate(), return -1 if not
 #       parse d into month, day, and year variables
 #       make them ints
 #       use three-step process to compute dayNum
@@ -32,8 +32,8 @@
 #       return dayNum
 
 
-from U07_Ex12_ValidDate import isValidDate
-from U07_Ex11_LeapYear import isLeapYear
+from Chapter07.U07_Ex12_ValidDate import isValidDate
+from Chapter07.U07_Ex11_LeapYear import isLeapYear
 
 def main():
     # introduce program
@@ -44,15 +44,20 @@ def main():
 
     # for each element in list validate with isValidDate() and call dayNumber() with element as parameter
     for date in dates:
-        if isValidDate(date):
+        dayNum = dayNumber(date)
+        if dayNum == -1:
+            print('{0} is not a valid date.'.format(date))
+        else:
             # print results
             print('The day number for {0} is {1}'.format(date, dayNumber(date)))
-        else:
-            print('{0} is not a valid date.'.format(date))
 
 #   dayNumber():
 #       d is date argument in mm/dd/yyyy format
 def dayNumber(d):
+    # verify date to be valid by calling isValidDate(), return -1 if not
+    if not isValidDate(d):
+        return -1
+
     # parse d into month, day, and year variables
     month, day, year = d.split('/')
 
@@ -76,3 +81,17 @@ def dayNumber(d):
 
 if __name__ == '__main__':
     main()
+
+
+'''
+RESULTS:
+========
+dayNumber("1/1/1970")     -->     1 |     1 | [ Pass ]
+dayNumber("9/31/2000")    -->    -1 |    -1 | [ Pass ]
+dayNumber("2/29/2017")    -->    -1 |    -1 | [ Pass ]
+dayNumber("2/28/2017")    -->    59 |    59 | [ Pass ]
+dayNumber("2/29/2000")    -->    60 |    60 | [ Pass ]
+dayNumber("12/31/2000")   -->   366 |   366 | [ Pass ]
+dayNumber("12/31/1999")   -->   365 |   365 | [ Pass ]
+========
+'''
