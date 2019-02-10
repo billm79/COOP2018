@@ -33,7 +33,7 @@
 #       return validDate
 
 
-from U07_Ex11_LeapYear import isLeapYear
+from Chapter07.U07_Ex11_LeapYear import isLeapYear
 
 def main():
     # introduce program
@@ -75,3 +75,17 @@ def isValidDate(d):
 
 if __name__ == '__main__':
     main()
+
+
+'''
+RESULTS:
+========
+isValidDate("1/1/1970")     -->       1 |       1 | [ Pass ]
+isValidDate("9/31/2000")    -->       0 |       0 | [ Pass ]
+isValidDate("2/29/2017")    -->       0 |       0 | [ Pass ]
+isValidDate("2/28/2017")    -->       1 |       1 | [ Pass ]
+isValidDate("2/29/2000")    -->       1 |       1 | [ Pass ]
+isValidDate("2/28/2000")    -->       1 |       1 | [ Pass ]
+isValidDate("13/28/2000")   -->       0 |       0 | [ Pass ]
+========
+'''
