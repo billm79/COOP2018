@@ -30,6 +30,10 @@ from random import *
 from os import system
 from sys import platform
 
+if platform == 'windows':
+    import winsound
+
+
 topBound = 0
 rightBound = 0
 bottomBound = 0
@@ -121,8 +125,10 @@ def beep(dir):
     if not SILENT:
         if platform == 'darwin':
             system('say {} &'.format('left' if dir == 'L' else 'right' if dir == 'R' else 'top' if dir == 'T' else 'bottom'))
+        elif platform == 'windows':
+            winsound.PlaySound('SystemExclamation', winsound.SND_ALIAS)
         else:
-            print('L\a')
+            print('\a')
 
 
 def flash(side):
