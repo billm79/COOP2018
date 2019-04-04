@@ -104,6 +104,7 @@
 
 from graphics import *
 from tkinter.filedialog import asksaveasfilename, askopenfilename
+from math import ceil
 
 #   global variables: button objects, button constant values (e.g. LOADIMAGE = 0), image height and width, win
 buttonLoad = Rectangle(Point(0,0), Point(1,1)); LOADIMAGE = 1; buttonLoadActive = 0
@@ -118,7 +119,8 @@ buttonIdleFill = '#cccccc'; buttonActiveFill = '#999999'
 
 # create GraphWin
 win = GraphWin('Image Manipulation', 1000, 800)
-midX = (win.getWidth() - 200) / 2; midY = win.getHeight() / 2
+imgAreaW = win.getWidth() - 200; imgAreaH = win.getHeight()
+midX = imgAreaW / 2; midY = imgAreaH / 2
 buttonHeight = 30; buttonWidth = 180; buttonSep = 10; menuLeft = win.getWidth() - 200
 img = Image(Point(midX, midY), 800, 800); imgHeight = 0; imgWidth = 0
 imgOrig = img
@@ -383,10 +385,14 @@ def loadImage():
 
     # open the file
     img = Image(Point(midX, midY), imgFile)
-    imgOrig = img.clone()
 
     # get width and height of image and store to global variables
     imgWidth = img.getWidth(); imgHeight = img.getHeight()
+
+    if imgWidth > imgAreaW or imgHeight > imgAreaH:
+        scaleImg(max(imgWidth / imgAreaW, imgHeight / imgAreaH))
+
+    imgOrig = img.clone()
 
     # display color image
     img.draw(win)
@@ -404,6 +410,34 @@ def saveImage():
     # save the file
     if imgNew:
         img.save(imgNew)
+
+
+def scaleImg(factor):
+    global img, imgWidth, imgHeight
+
+    factor = ceil(factor)
+
+    # imgTmp = Image(Point(midX, midY), imgAreaW, imgAreaH)
+    imgTmp = Image(Point(midX, midY), imgWidth // factor, imgHeight // factor)
+    inc = int((imgHeight / factor) / 100)
+    pbar = ProgressBar(win, x=300, y=750, length=200, width=8,
+                       max_val=imgHeight // factor, show=True,
+                       place='B', msg='Scaling image...', msgPlace='T')
+    pbar.draw(win)
+    for row in range(imgHeight // factor):
+        for col in range(imgWidth // factor):
+            # print(row, col, end='\b' * (len(str(row)) + len(str(col)) + 1))
+            c = img.getPixel(col * factor, row * factor)
+            imgTmp.setPixel(col, row, color_rgb(c[0], c[1], c[2]))
+        if row % inc == 0:
+            pbar.update(row)
+    pbar.update(imgHeight // factor)
+    pbar.undraw()
+
+    img = imgTmp.clone()
+    # img.setAnchor(Point(midX, midY))
+    imgWidth = img.getWidth(); imgHeight = img.getHeight()
+
 
 def grayscale():
     """
@@ -535,11 +569,11 @@ def other3():
     pass
 
 class ProgressBar:
-    bar_win = ''
-    bar_length = 0; bar_width = 0   # in pixels
-    bar_x = 0; bar_y = 0
-    bar_max = 0                     # maximum passed value
-    show_text = False
+    # bar_win = ''
+    # bar_length = 0; bar_width = 0   # in pixels
+    # bar_x = 0; bar_y = 0
+    # bar_max = 0                     # maximum passed value
+    # show_text = False
 
     # text_placement options:
     #
@@ -548,27 +582,31 @@ class ProgressBar:
     # BL     B     BR
     #
     # blank means no text (default)
-    text_placement = ''
+    # text_placement = ''
 
-    bar_rect = Rectangle(Point(0,0), Point(0,0))
-    bar_pbar = Rectangle(Point(0,0), Point(0,0))
-    bar_text = Text(Point(0,0), '')
+    # bar_rect = Rectangle(Point(0,0), Point(0,0))
+    # bar_pbar = Rectangle(Point(0,0), Point(0,0))
+    # bar_text = Text(Point(0,0), '')
 
-    def __init__(self, window, x, y, length, width, max_val, show, place):
-        self.set_window(window)
-        self.set_x(x)
-        self.set_y(y)
-        self.set_bar_length(length)
-        self.set_bar_width(width)
-        self.set_bar_max(max_val)
-        self.set_show_text(show)
-        self.set_text_placement(place)
+    def __init__(self, window, x=0, y=0, length=0, width=0, max_val=0, show=False, place='', msg='', msgPlace=''):
+        self.win = window
+        self.bar_x = x
+        self.bar_y = y
+        self.bar_length = length
+        self.bar_width = width
+        self.bar_max = max_val
+        self.show_text = show
+        self.text_placement = place
+        self.msg = msg
+        self.msgPlace = msgPlace
+
         self.bar_rect = Rectangle(Point(x, y), Point(x + length, y + width))
         self.bar_rect.setOutline('black')
         self.bar_rect.setFill('white')
         self.bar_pbar = Rectangle(Point(x+2, y+2), Point(x+3, y+width-2))
         self.bar_pbar.setOutline('gray')
         self.bar_pbar.setFill('gray')
+
         if show:
             if place == 'TL':
                 self.bar_text = Text(Point(x, y - 20), '0%')
@@ -587,37 +625,55 @@ class ProgressBar:
             if place == 'L':
                 self.bar_text = Text(Point(x - 15, y + width / 2), '0%')
 
-    def set_window(self, arg):
-        if arg:
-            self.win = arg
+        if msg:
+            if msgPlace == 'TL':
+                self.bar_msg = Text(Point(x, y - 20), msg)
+            if msgPlace == 'T':
+                self.bar_msg = Text(Point(x + length / 2, y - 20), msg)
+            if msgPlace == 'TR':
+                self.bar_msg = Text(Point(x + length - 15, y - 20), msg)
+            if msgPlace == 'R':
+                self.bar_msg = Text(Point(x + length + 5, y), msg)
+            if msgPlace == 'BR':
+                self.bar_msg = Text(Point(x + length - 15, y + 20), msg)
+            if msgPlace == 'B':
+                self.bar_msg = Text(Point(x + length / 2, y + 20), msg)
+            if msgPlace == 'BL':
+                self.bar_msg = Text(Point(x, y + 20), msg)
+            if msgPlace == 'L':
+                self.bar_msg = Text(Point(x - 15, y + width / 2), msg)
 
-    def set_x(self, arg):
-        if arg:
-            self.bar_x = arg
-
-    def set_y(self, arg):
-        if arg:
-            self.bar_y = arg
-
-    def set_bar_length(self, arg):
-        if arg:
-            self.bar_length = arg
-
-    def set_bar_width(self, arg):
-        if arg:
-            self.bar_width = arg
-
-    def set_bar_max(self, arg):
-        if arg:
-            self.bar_max = arg
-
-    def set_show_text(self, arg):
-        if arg:
-            self.show_text = arg
-
-    def set_text_placement(self, arg):
-        if arg:
-            self.text_placement = arg
+    # def set_window(self, arg):
+    #     if arg:
+    #         self.win = arg
+    #
+    # def set_x(self, arg):
+    #     if arg:
+    #         self.bar_x = arg
+    #
+    # def set_y(self, arg):
+    #     if arg:
+    #         self.bar_y = arg
+    #
+    # def set_bar_length(self, arg):
+    #     if arg:
+    #         self.bar_length = arg
+    #
+    # def set_bar_width(self, arg):
+    #     if arg:
+    #         self.bar_width = arg
+    #
+    # def set_bar_max(self, arg):
+    #     if arg:
+    #         self.bar_max = arg
+    #
+    # def set_show_text(self, arg):
+    #     if arg:
+    #         self.show_text = arg
+    #
+    # def set_text_placement(self, arg):
+    #     if arg:
+    #         self.text_placement = arg
 
     def get_x(self):
         return self.bar_x
@@ -642,12 +698,16 @@ class ProgressBar:
         self.bar_rect.draw(self.bar_win)
         if self.show_text:
             self.bar_text.draw(self.bar_win)
+        if self.msg:
+            self.bar_msg.draw(self.bar_win)
 
     def undraw(self):
         self.bar_rect.undraw()
         self.bar_pbar.undraw()
         if self.show_text:
             self.bar_text.undraw()
+        if self.msg:
+            self.bar_msg.undraw()
 
     def update(self, val):
         pct = val / self.bar_max
