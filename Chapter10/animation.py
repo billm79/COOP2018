@@ -15,25 +15,25 @@ class InputDialog:
     def __init__(self, angle, vel, height):
         """ Build and display the input window """
         
-        self.win = win = GraphWin("Initial Values", 200, 300)
-        win.setCoords(0,4.5,4,.5)
+        self.win = GraphWin("Initial Values", 200, 300)
+        self.win.setCoords(0,4.5,4,.5)
         
-        Text(Point(1.8-len("Angle")*.1,1), "Angle").draw(win)
-        self.angle = Entry(Point(2.8,1), 5).draw(win)
+        Text(Point(1.8-len("Angle")*.1,1), "Angle").draw(self.win)
+        self.angle = Entry(Point(2.8,1), 5).draw(self.win)
         self.angle.setText(str(angle))
 
-        Text(Point(1.8-(len("Velocity")-2)*.1,2), "Velocity").draw(win)
-        self.vel = Entry(Point(2.8,2), 5).draw(win)
+        Text(Point(1.8-(len("Velocity")-2)*.1,2), "Velocity").draw(self.win)
+        self.vel = Entry(Point(2.8,2), 5).draw(self.win)
         self.vel.setText(str(vel))
 
-        Text(Point(1.8-(len("Height")-1)*.1,3), "Height").draw(win)
-        self.height = Entry(Point(2.8,3), 5).draw(win)
+        Text(Point(1.8-(len("Height")-1)*.1,3), "Height").draw(self.win)
+        self.height = Entry(Point(2.8,3), 5).draw(self.win)
         self.height.setText(str(height))
 
-        self.fire = Button(win, Point(1,4), 1.25, .5, "Fire!")
+        self.fire = Button(self.win, Point(1,4), 1.25, .5, "Fire!")
         self.fire.activate()
 
-        self.quit = Button(win, Point(3,4), 1.25, .5, "Quit")
+        self.quit = Button(self.win, Point(3,4), 1.25, .5, "Quit")
         self.quit.activate()
 
     def getValues(self):
@@ -46,7 +46,7 @@ class InputDialog:
 
     def interact(self):
         """ wait for user to click Quit or Fire button
-        Returns a string indicating which button was clicker
+        Returns a string indicating which button was clicked
         """
         
         while True:
@@ -66,8 +66,8 @@ class ShotTracker:
     """ Graphical depiction of a projectile flight using a Circle """
 
     def __init__(self, win, angle, velocity, height):
-        """win is the GraphWin to display the shot, angle, velocity, and
-        height are initial projectile parameters.
+        """win is the GraphWin to display the shot.
+        angle, velocity, and height are initial projectile parameters.
         """
         
         self.proj = Projectile(angle, velocity, height)

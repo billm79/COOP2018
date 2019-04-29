@@ -26,23 +26,23 @@ class Button:
         self.deactivate()
 
     def clicked(self, p):
-        "Returns true if button active and p is inside"
+        """Returns true if button active and p is inside"""
         return (self.active and
                 self.xmin <= p.getX() <= self.xmax and
                 self.ymin <= p.getY() <= self.ymax)
 
     def getLabel(self):
-        "Returns the label string of this button."
+        """Returns the label string of this button."""
         return self.label.getText()
 
     def activate(self):
-        "Sets this button to 'active'."
+        """Sets this button to 'active'."""
         self.label.setFill('black')
         self.rect.setWidth(2)
         self.active = True
 
     def deactivate(self):
-        "Sets this button to 'inactive'."
+        """Sets this button to 'inactive'."""
         self.label.setFill('darkgrey')
         self.rect.setWidth(1)
         self.active = False

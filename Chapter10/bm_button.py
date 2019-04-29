@@ -46,19 +46,19 @@ class Button:
         self.deactivate()
 
     def activate(self):
-        "Sets this button to 'active'. "
+        """Sets this button to 'active'. """
         self.label.setFill('black')
         self.rect.setWidth(2)
         self.active = True
 
     def deactivate(self):
-        "Sets this button to 'inactive'."
+        """Sets this button to 'inactive'."""
         self.label.setFill('darkgrey')
         self.rect.setWidth(1)
         self.active = False
 
     def clicked(self, pt):
-        "RETURNS True if button active and pt is inside"
+        """RETURNS True if button active and pt is inside"""
         return self.active and \
             self.xmin <= pt.getX() <= self.xmax and \
             self.ymin <= pt.getY() <= self.ymax
