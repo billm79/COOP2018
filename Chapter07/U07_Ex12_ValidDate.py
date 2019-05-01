@@ -35,6 +35,19 @@
 
 from Chapter07.U07_Ex11_LeapYear import isLeapYear
 
+# globals: mth, day, yr
+mth = ''    #input("mth: ")
+day = ''    #input("day: ")
+yr = '' #input("yr: ")
+
+
+def setInputs(m, d, y):
+    global mth, day, yr
+    mth = m
+    day = d
+    yr = y
+
+
 def main():
     # introduce program
     print('\nThis program contains the function isValidDate() which determines if a given date (mm/dd/yyyy) is valid.\n')
@@ -49,7 +62,9 @@ def main():
 
 # isValidDate()
 #     d is date argument in mm/dd/yyyy format
-def isValidDate(d):
+def isValidDate(m, d, y):
+    setInputs(m, d, y)
+    # uses globals
     # parse d into month, day, and year variables
     month, day, year = d.split('/')
 

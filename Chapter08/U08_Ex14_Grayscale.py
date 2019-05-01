@@ -46,7 +46,7 @@ def main():
     msg.undraw()
 
     # get the image file using askopenfilename from tkinter.filedialog
-    imgFile = askopenfilename(filetypes=(("GIF files", "*.gif"), ("All files", "*.*")))
+    imgFile = askopenfilename(filetypes=(("GIF files", "*.gif"), ("PNG files", "*.png"), ("All files", "*.*")))
 
     if not imgFile:
         return
@@ -69,6 +69,8 @@ def main():
 
     # convert pixels to grayscale
     #     using image width and height, get pixel rgb values and set to grayscale
+    chunk_size = imgWidth // 20
+    print(chunk_size, imgWidth)
     for i in range(imgWidth):
         for j in range(imgHeight):
             rgb = img.getPixel(i, j)
@@ -78,10 +80,10 @@ def main():
             gray = grayLum
             img.setPixel(i, j, color_rgb(gray, gray, gray))
 
-
-    # display grayscale image
-    img.undraw()
-    img.draw(win)
+        if i % chunk_size == 0:
+            # display grayscale image
+            img.undraw()
+            img.draw(win)
 
     # get mouse click (save button?)
     actionText.setText('Save')

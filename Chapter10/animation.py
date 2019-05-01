@@ -76,7 +76,6 @@ class ShotTracker:
         self.marker.setOutline("red")
         self.marker.draw(win)
 
-        
     def update(self, dt, win):
         """ Move the shot dt seconds farther along its flight """
 
@@ -90,7 +89,6 @@ class ShotTracker:
         dy = self.proj.getY() - center.getY()
         self.marker.move(dx,dy)
 
-        
     def getX(self):
         """ return the current x coordinate of the shot's center """
         return self.proj.getX()
@@ -135,8 +133,8 @@ def main():
         angle, vel, height = inputwin.getValues()
         shot = ShotTracker(win, angle, vel, height)
         while 0 <= shot.getY() and -10 < shot.getX() <= 420:
-            shot.update(1/100, win)
-            update(100)
+            shot.update(1/10, win)
+            update(10)
         Text(Point(shot.getX(), shot.getY()+5), "x = {0:0.1f}".format(shot.getX())).draw(win)
         #shot.destroy()
         

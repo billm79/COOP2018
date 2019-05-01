@@ -62,6 +62,7 @@ def primes_list(num):
         thisNum += 1
     return primes
 
+
 def main2():
     # introduce program
     print('This program prints all prime numbers up to a given number.\n')
@@ -79,5 +80,45 @@ def main2():
         print('{} '.format(prime), end='')
     print()
 
+
+def main3():
+    # introduce program
+    print('\nThis program uses the sieve of Eratosthenes to print all prime numbers up to a given number.\n')
+
+    # get integer number from user
+    num = int(input('Enter an integer: '))
+
+    # initialize a list the length of num + 1
+    # set all elements in primes to True
+    print("\nInitializing list...")
+    primes = [True] * (num + 1)
+
+    # set all multiples of prime numbers in primes[] to False, starting at the first prime number, 2
+    print("Eliminating non-primes...")
+    count = 0
+    dots = 0
+    for i in range(2, int(len(primes) / 2)):
+        for j in range(i * 2, len(primes), i):
+            primes[j] = False
+            # count += 1
+            # if count % 30000 == 0:
+            #     print('.', end='')
+            #     dots += 1
+            #     if dots % 120 == 0:
+            #         print()
+    print()
+
+    # print all primes (elements in primes[] with value of True)
+    count = 0
+    print('\nPrime numbers <= {}: '.format(num))
+    for i in range(2, len(primes)):
+        if primes[i]:
+            print('{} '.format(i), end='')
+            count += 1
+            if count % 15 == 0:
+                print()
+    print()
+
+
 if __name__ == '__main__':
-    main2()
+    main3()

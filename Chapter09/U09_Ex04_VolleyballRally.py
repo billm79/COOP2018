@@ -96,13 +96,13 @@ def simOneGame(pSrvA, pSrvB, server):
                 scoreA += 1
             else:
                 scoreB += 1
-            server = 'B'
+                server = 'B'
         else:
             if randNum < pSrvB:
                 scoreB += 1
             else:
                 scoreA += 1
-            server = 'A'
+                server = 'A'
 
     return scoreA, scoreB
 

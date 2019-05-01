@@ -1,6 +1,7 @@
 # button.py
 from graphics import *
 
+
 class Button:
 
     """A button is a labeled rectangle in a window.

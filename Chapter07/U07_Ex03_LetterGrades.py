@@ -57,6 +57,9 @@ def letterGrade(score):
         letter = 'D'
     return letter
 
+def stupid(arg):
+    return arg
+
 
 if __name__ == '__main__':
     main()

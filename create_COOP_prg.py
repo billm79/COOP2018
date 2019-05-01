@@ -39,6 +39,7 @@ else:
 
 PREFIX = ''          # used if new directory is not at current level; empty string otherwise
 PROFILE_FILENAME = 'COOP_profile.txt'
+MENU_SPACING = '\n\n'
 
 
 def main():
@@ -47,7 +48,7 @@ def main():
 
     # Program Loop: 1) Create/update profile; 2) Create program file; 3) Quit
     while True:
-        print("\nMAIN MENU")
+        print("{}MAIN MENU".format(MENU_SPACING))
         print("------------------------")
         print("1) Create/update profile")
         print("2) Create program file")
@@ -77,7 +78,7 @@ def profile():
 
     while True:
         pathExists = path.exists()
-        print('\nCREATE/UPDATE PROFILE')
+        print('{}CREATE/UPDATE PROFILE'.format(MENU_SPACING))
         print("-----------------------")
 
         if pathExists:
@@ -107,10 +108,10 @@ def profile_update():
     Reads profile file and allows user to update info; writes changes to file
     """
     profile_read()
-    profile_create()
+    profile_create(True)
 
 
-def profile_create():
+def profile_create(edit=False):
     """
     After calling edit routine, writes new profile info to profile file
     """
@@ -123,6 +124,8 @@ def profile_create():
 
     print(csv_data[:-1], file=f, end='')
     f.close()
+
+    feedback('Profile was {} successfully.'.format('edited' if edit else 'created'))
 
 
 def profile_edit():
@@ -139,8 +142,9 @@ def profile_edit():
     :param source: str -> source of program assignment (defaults to 'Python Programming')
     :return: str * 5 -> edited strings
     """
-    print("\nCREATING PROFILE")
-    print("\nChange info by typing the replacement. Just hit Enter to accept the current value.\n")
+    print("{}CREATING PROFILE".format(MENU_SPACING))
+    print('----------------')
+    print("Change info by typing the replacement. Just hit Enter to accept the current value.\n")
     new_author  = input(' Author ({}): '.format(INFO[AUTHOR]))
     new_course  = input(' Course ({}): '.format(INFO[COURSE]))
     new_section = input('Section ({}): '.format(INFO[SECTION]))
@@ -166,7 +170,7 @@ def profile_show():
     Displays current profile
     """
     profile_read()
-    print("\n\nCURRENT PROFILE")
+    print("{}CURRENT PROFILE".format(MENU_SPACING))
     print(    "----------------------------")
     print(' Author: {}'.format(INFO[AUTHOR]))
     print(' Course: {}'.format(INFO[COURSE]))
@@ -181,9 +185,12 @@ def profile_read():
     Reads profile file and populates INFO list
     """
     global INFO
-    f = open(PROFILE_FILENAME, 'r')
-    INFO = f.readline().split(',')
-    f.close()
+    try:
+        f = open(PROFILE_FILENAME, 'r')
+        INFO = f.readline().split(',')
+        f.close()
+    except FileNotFoundError:
+        pass
 
 
 def program():
@@ -214,9 +221,21 @@ def program():
 
     file_path = str(dir_path) + SLASH + INFO[FILENAME]
 
-    f = open(file_path, 'w')
-    print(header, file=f)
-    f.close()
+    try:
+        f = open(file_path, 'w')
+        print(header, file=f)
+        f.close()
+        feedback('Program file was created successfully.')
+    except IOError:
+        feedback('Program file was NOT created successfully.')
+
+
+def feedback(msg):
+    msg_len = len(msg)
+    print()
+    print('+-{}-+'.format('-' * msg_len))
+    print('| {} |'.format(msg))
+    print('+-{}-+'.format('-' * msg_len))
 
 
 def make_hdr():
@@ -247,7 +266,7 @@ Algorithm
 
 
 def get_header_info():
-    print("\nPROGRAM HEADER INFO")
+    print("{}PROGRAM HEADER INFO".format(MENU_SPACING))
     print("-------------------")
 
     while True:

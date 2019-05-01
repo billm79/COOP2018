@@ -25,6 +25,7 @@
 import traceback, sys
 
 # from _path_to_my_program_file_ import *
+from Chapter09.U09_Ex01_RacquetBallBestOfNGames_ import *
 
 COLOR_BLUE = '\x1b[1;34m'
 COLOR_RED  = '\x1b[6;31m'
@@ -107,6 +108,52 @@ def testTemplate():
     printResults(results)
 
 
+def testGameOver():
+    results = []        # list to hold tests
+
+    # replace   'function(params)' with str version of call to function to test (in quotes);
+    #           'expected results (properly typed)' with expected results (doesn't have to be str;
+    #               should be correct data type)
+    # copy line multiple times to run multiple tests (with different parameters)
+    results.append(runTest('gameOver(0, 0)', False))
+    results.append(runTest('gameOver(0, 15)', True))
+    results.append(runTest('gameOver(15, 0)', True))
+    results.append(runTest('gameOver(7, 8)', False))
+    results.append(runTest('gameOver(14, 15)', True))
+    results.append(runTest('gameOver(15, 14)', True))
+    results.append(runTest('gameOver(3, 14)', False))
+    results.append(runTest('gameOver(14, 3)', False))
+    printResults(results)
+
+
+def testMatchOver():
+    results = []        # list to hold tests
+
+    # replace   'function(params)' with str version of call to function to test (in quotes);
+    #           'expected results (properly typed)' with expected results (doesn't have to be str;
+    #               should be correct data type)
+    # copy line multiple times to run multiple tests (with different parameters)
+    results.append(runTest('matchOver(0, 0, 5)', False))
+    results.append(runTest('matchOver(1, 0, 5)', False))
+    results.append(runTest('matchOver(2, 0, 5)', False))
+    results.append(runTest('matchOver(3, 0, 5)', True))
+    results.append(runTest('matchOver(0, 1, 5)', False))
+    results.append(runTest('matchOver(0, 2, 5)', False))
+    results.append(runTest('matchOver(0, 3, 5)', True))
+    results.append(runTest('matchOver(1, 1, 5)', False))
+    results.append(runTest('matchOver(2, 2, 5)', False))
+    results.append(runTest('matchOver(2, 3, 5)', True))
+    results.append(runTest('matchOver(3, 2, 5)', True))
+    results.append(runTest('matchOver(3, 4, 7)', True))
+    results.append(runTest('matchOver(3, 3, 7)', False))
+    results.append(runTest('matchOver(3, 2, 6)', False))
+    results.append(runTest('matchOver(3, 3, 6)', False))
+    results.append(runTest('matchOver(3, 4, 6)', True))
+    printResults(results)
+
+
 if __name__ == '__main__':
     # Replace 'function_to_call' with the name of the function you created above
     # function_to_call()
+    # testGameOver()
+    testMatchOver()

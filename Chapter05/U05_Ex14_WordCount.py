@@ -24,6 +24,9 @@
 #   Print results
 
 
+DEBUG = False
+
+
 def main():
     # Print intro
     print('This program displays counts of lines, words, and characters in a file input by the user.')
@@ -39,7 +42,12 @@ def main():
 
     # Close file
     fileHandle.close()
+    method1(lines)
+    method2(lines)
 
+
+def method1(lines):
+    print("METHOD 1\n--------")
     # Loop through lines, counting words and characters
     wordCount = 0
     charCount = 0
@@ -49,9 +57,42 @@ def main():
         wordCount += len(words)
 
         for word in words:
-            charCount += len(word)
+            if DEBUG:
+                print('|', end='')
+                print(word.strip('\n'), end='')
+                if len(word.strip('\n')) == 0:
+                    for char in word:
+                        print(ord(char), end='')
+            charCount += len(word.strip('\n'))
+        if DEBUG:
+            print('|')
 
     # Print results
     print('Lines: {0}\nWords: {1}\nChars: {2}'.format(len(lines), wordCount, charCount))
+
+
+def method2(lines):
+    print("\n\nMETHOD 2\n--------")
+    # Loop through lines, counting words and characters
+    wordCount = 0
+    charCount = 0
+    lineCount = 0
+
+    for line in lines:
+        lineCount += 1
+        for word in line.split():
+            wordCount += 1
+            if DEBUG:
+                print('|', end='')
+            for char in word.strip('\n'):
+                if DEBUG:
+                    print(char, end='')
+                charCount += 1
+        if DEBUG:
+            print('|')
+
+    # Print results
+    print('Lines: {0}\nWords: {1}\nChars: {2}'.format(len(lines), wordCount, charCount))
+
 
 main()

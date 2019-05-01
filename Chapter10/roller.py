@@ -8,6 +8,7 @@ from graphics import GraphWin, Point
 from button import Button
 from dieview import DieView 
 
+
 def main():
 
     # create the application window

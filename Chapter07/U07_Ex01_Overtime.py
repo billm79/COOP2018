@@ -25,7 +25,7 @@
 
 def main():
     # introduce program
-    print('\nThis program calculates weekly wages, taking overtime into account.')
+    print('\nThis program cal43culates weekly wages, taking overtime into account.')
 
     # get hours worked and hourly rate from user
     hours = float(input('\nHow many hours were worked this week? '))
@@ -56,8 +56,11 @@ if __name__ == '__main__':
 RESULTS:
 ========
 calcWages(0, 10)    -->     0 |       0 | [ Pass ]
+calcWages(1, 10)    -->    10 |      10 | [ Pass ]
 calcWages(10, 10)   -->   100 |     100 | [ Pass ]
+calcWages(39, 10)   -->   390 |     390 | [ Pass ]
 calcWages(40, 10)   -->   400 |     400 | [ Pass ]
 calcWages(41, 10)   -->   415 |   415.0 | [ Pass ]
+calcWages(50, 10)   -->   550 |   550.0 | [ Pass ]
 ========
 '''

@@ -58,6 +58,6 @@ def main():
     listSum = sumList(contents)
 
     # print listSum
-    print('The sum of the numbers in {0} is {1}.'.format(fileName, listSum))
+    print('The sum of the squares of numbers in {0} is {1}.'.format(fileName, listSum))
 
 main()
