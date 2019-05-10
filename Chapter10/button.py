@@ -13,6 +13,7 @@ class Button:
         """ Creates a rectangular button, eg:
         qb = Button(myWin, centerPoint, width, height, 'Quit') """ 
 
+        self.win = win
         w,h = width/2.0, height/2.0
         x,y = center.getX(), center.getY()
         self.xmax, self.xmin = x+w, x-w
@@ -47,3 +48,8 @@ class Button:
         self.label.setFill('darkgrey')
         self.rect.setWidth(1)
         self.active = False
+
+    def setSize(self, pts):
+        self.label.setSize(pts)
+        self.label.undraw()
+        self.label.draw(self.win)

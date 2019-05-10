@@ -30,7 +30,8 @@ Algorithm
 """
 
 from graphics import GraphWin, Point, Text
-from button3D import ButtonWithCoords as Button
+from button import *
+# from button3D import ButtonWithCoords as Button
 from random import randrange
 from time import sleep
 
@@ -43,18 +44,25 @@ def main():
     win.setCoords(0, 0, coordWidth, coordHeight)
 
     # place three buttons in window
-    doors = [Button(win, Point(2, 5), 2, 4, door1(), factorWidth, factorHeight),
-             Button(win, Point(5, 5), 2, 4, door2(), factorWidth, factorHeight),
-             Button(win, Point(8, 5), 2, 4, door3(), factorWidth, factorHeight)]
+    # doors = [Button(win, Point(2, 5), 2, 4, door1(), factorWidth, factorHeight),
+    #          Button(win, Point(5, 5), 2, 4, door2(), factorWidth, factorHeight),
+    #          Button(win, Point(8, 5), 2, 4, door3(), factorWidth, factorHeight)]
+    doors = [Button(win, Point(2, 5), 2, 4, "Door 1"),
+             Button(win, Point(5, 5), 2, 4, "Door 2"),
+             Button(win, Point(8, 5), 2, 4, "Door 3")]
     for door in doors:
+        door.setSize(36)
         door.activate()
 
     # place Quit button in window
-    quitButton = Button(win, Point(8.5, 1.5), 1, 1, "Quit", factorWidth, factorHeight)
+    # quitButton = Button(win, Point(8.5, 1.5), 1, 1, "Quit", factorWidth, factorHeight)
+    quitButton = Button(win, Point(8.5, 1.5), 1, 1, "Quit")
+    quitButton.setSize(24)
     quitButton.activate()
 
     # place blank message text in window
     result = Text(Point(3.5, 1.5), '')
+    result.setSize(18)
     result.draw(win)
 
     # get mouse click
