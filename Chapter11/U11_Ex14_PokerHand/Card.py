@@ -35,35 +35,6 @@ class Card:
                       '9': 9, '10': 10, 'J': 11, 'Q': 12, 'K': 13, 'A': 14}
         self.rankNames = {2: '2', 3: '3', 4: '4', 5: '5', 6: '6', 7: '7', 8: '8',
                           9: '9', 10: '10', 11: 'Jack', 12: 'Queen', 13: 'King', 14: 'Ace'}
-        self.suit = suit
-        self.rank = rank
-
-    def setSuit(self, arg):
-        """Sets the suit (int, 0-4) of an individual card"""
-        self.suit = arg
-
-    def setRank(self, arg):
-        self.rank = arg
-
-    def getSuit(self):
-        return self.suit
-
-    def getRank(self):
-        return self.rank
-
-    def getSuitName(self):
-        return self.suitNames[self.suits[self.suit]]
-
-    def getRankName(self):
-        return self.rankNames[self.rank]
-
-    def draw(self, win, center):
-        """
-        Draws the card
-        :param win: Graphics -> window in which to draw
-        :param center: Point -> center of card
-        :return: None
-        """
         _cards = {(0, 14): 'images/ace_of_hearts.gif', (0, 2): 'images/2_of_hearts.gif',
                   (0, 3): 'images/3_of_hearts.gif', (0, 4): 'images/4_of_hearts.gif',
                   (0, 5): 'images/5_of_hearts.gif', (0, 6): 'images/6_of_hearts.gif',
@@ -92,7 +63,37 @@ class Card:
                   (3, 9): 'images/9_of_spades.gif', (3, 10): 'images/10_of_spades.gif',
                   (3, 11): 'images/jack_of_spades2.gif', (3, 12): 'images/queen_of_spades2.gif',
                   (3, 13): 'images/king_of_spades2.gif'}
-        self.cardImg = Image(center, _cards.get((self.suit, self.rank)))
+        self.suit = suit
+        self.rank = rank
+        self.image = _cards.get((self.suit, self.rank))
+
+    def setSuit(self, arg):
+        """Sets the suit (int, 0-4) of an individual card"""
+        self.suit = arg
+
+    def setRank(self, arg):
+        self.rank = arg
+
+    def getSuit(self):
+        return self.suit
+
+    def getRank(self):
+        return self.rank
+
+    def getSuitName(self):
+        return self.suitNames[self.suits[self.suit]]
+
+    def getRankName(self):
+        return self.rankNames[self.rank]
+
+    def draw(self, win, center):
+        """
+        Draws the card
+        :param win: Graphics -> window in which to draw
+        :param center: Point -> center of card
+        :return: None
+        """
+        self.cardImg = Image(center, self.image)
         self.cardImg.draw(win)
 
     def undraw(self):

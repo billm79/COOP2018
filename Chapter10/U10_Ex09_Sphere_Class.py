@@ -46,7 +46,7 @@ def main():
     mySphere = Sphere(radius)
     print(("\nA sphere with radius {r:.3f} {u} has a volume of {v:.3f} "\
            "cubic {u} and a surface area of {a:.3f} square {u}.").
-          format(r=radius, v=mySphere.volume(), a=mySphere.surfaceArea(), u=units))
+          format(r=mySphere.getRadius(), v=mySphere.volume(), a=mySphere.surfaceArea(), u=units))
 
 
 if __name__ == '__main__':

@@ -30,7 +30,7 @@ Algorithm
 """
 
 from graphics import GraphWin, Point, Text
-from button import Button
+from button3D import ButtonWithCoords as Button
 from random import randrange
 from time import sleep
 
@@ -38,17 +38,19 @@ from time import sleep
 def main():
     # create GraphWin
     win = GraphWin("Three Button Monte", 800, 600)
-    win.setCoords(0, 0, 10, 10)
+    coordWidth = 10; coordHeight = 10
+    factorWidth = win.width / coordWidth; factorHeight = win.height / coordHeight
+    win.setCoords(0, 0, coordWidth, coordHeight)
 
     # place three buttons in window
-    doors = [Button(win, Point(2, 5), 2, 4, door1()),
-             Button(win, Point(5, 5), 2, 4, door2()),
-             Button(win, Point(8, 5), 2, 4, door3())]
+    doors = [Button(win, Point(2, 5), 2, 4, door1(), factorWidth, factorHeight),
+             Button(win, Point(5, 5), 2, 4, door2(), factorWidth, factorHeight),
+             Button(win, Point(8, 5), 2, 4, door3(), factorWidth, factorHeight)]
     for door in doors:
         door.activate()
 
     # place Quit button in window
-    quitButton = Button(win, Point(8.5, 1.5), 1, 1, "Quit")
+    quitButton = Button(win, Point(8.5, 1.5), 1, 1, "Quit", factorWidth, factorHeight)
     quitButton.activate()
 
     # place blank message text in window
