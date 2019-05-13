@@ -9,7 +9,7 @@ class Button:
     and deactivate() methods. The clicked(p) method
     returns true if the button is active and p is inside it."""
 
-    def __init__(self, win, center, width, height, label):
+    def __init__(self, win, center, width, height, label, color='lightgray'):
         """ Creates a rectangular button, eg:
         qb = Button(myWin, centerPoint, width, height, 'Quit') """ 
 
@@ -21,7 +21,7 @@ class Button:
         p1 = Point(self.xmin, self.ymin)
         p2 = Point(self.xmax, self.ymax)
         self.rect = Rectangle(p1,p2)
-        self.rect.setFill('lightgray')
+        self.rect.setFill(color)
         self.rect.draw(win)
         self.label = Text(center, label)
         self.label.draw(win)
